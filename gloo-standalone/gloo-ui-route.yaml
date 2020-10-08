@@ -1,0 +1,15 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: gloo-ui
+  labels:
+    app: gloo
+    gloo: apiserver-ui
+spec:
+  host: gloo-ui.apps-crc.testing
+  to:
+    kind: Service
+    name: apiserver-ui
+    weight: 100
+  port:
+    targetPort: static

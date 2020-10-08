@@ -1,0 +1,20 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: gloo-proxy
+  namespace: gloo-system
+  labels:
+    app: gloo
+    gateway-proxy-id: gateway-proxy
+    gloo: gateway-proxy
+spec:
+  host: gloo-proxy.apps-crc.testing
+  to:
+    kind: Service
+    name: gateway-proxy
+    weight: 100
+  port:
+    targetPort: http
+  # TODO: попробовать использовать wildcardPolicy: Subdomain, 
+  # чтобы на VirtualService использовать domain в качестве условия применимости роутинга
+  wildcardPolicy: None

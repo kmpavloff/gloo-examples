@@ -1,0 +1,31 @@
+# https://docs.solo.io/gloo/latest/installation/platform_configuration/cluster_setup/#openshift
+# 
+# Error creating: pods "gateway-certgen-" is forbidden: unable to validate against any security 
+# context constraint: [spec.containers[0].securityContext.securityContext.runAsUser: Invalid value: 10101: must be in the ranges: [1000610000, 1000619999]]
+apiServer:
+  deployment:
+    floatingUserId: true
+gloo:
+  gloo:
+    deployment:
+      floatingUserId: true
+  gateway:
+    deployment:
+      floatingUserId: true
+    certGenJob:
+      floatingUserId: true
+  discovery:
+    deployment:
+      floatingUserId: true
+  gatewayProxies:
+    gatewayProxy:
+      podTemplate:
+        floatingUserId: true
+        disableNetBind: true
+        runUnprivileged: true
+  ingress:
+    deployment:
+      floatingUserId: true
+  ingressProxy:
+    deployment:
+      floatingUserId: true
